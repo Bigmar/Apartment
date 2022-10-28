@@ -1,0 +1,37 @@
+CREATE OR REPLACE TRIGGER SAVE_RESERVAS
+    AFTER INSERT ON RESERVA
+        FOR EACH ROW
+        DECLARE
+            V_CLIENTE VARCHAR2(50);
+            V_FECHA DATE;
+        BEGIN
+            SELECT USER INTO V_USERNAME FROM DUAL;
+            SELECT SYSDATE INTO V_FECHA FROM DUAL;
+            INSERT INTO 
+
+
+Actualizar el estado del inmueble al cancelar reserva.
+
+CREATE TRIGGER TR_RESERVA_CANCELAR
+ON RESERVA
+FOR DELETE
+AS
+    UPDATE INMUEBLE SET DISPONIBILIDAD=INMUEBLE.DISPONIBILIDAD+DELETED.IDINMUEBLE
+    FROM INMUEBLE
+    JOIN DELETED
+    ON DELETED.IDINMUEBLE=INMUEBLES.ID;
+    
+    
+    
+    Asignar un identificador cuando se realice un update a persona.
+    
+     CREATE TRIGGER trigger_persona_identificador
+AFTER UPDATE ON persona
+FOR EACH ROW
+BEGIN 
+   DECLARE $identificador TEXT;
+   SET $identificador = CONCAT(NEW.idpersona, '_', NEW.nombre, '_', NEW.apellido);
+   UPDATE persona
+   SET identificador = $identificador 
+   WHERE id = OLD.id;
+END;
