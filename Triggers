@@ -79,3 +79,19 @@ BEGIN
 	THEN RAISE_APPLICATION_ERROR(-20500, 'NO SE ENCUENTRA EN HORARIO OPERATIVO, FAVOR DE CONTACTAR A SOPORTE DB');
 	END IF;
 END;
+
+
+
+
+Verificar los precios para que pueda redondear y que no sean menores a 0.
+
+create or replace trigger tr_revisar_precio_renta
+ before update of valor
+ on renta
+ for each row
+ begin
+  if (:new.valor<0) then
+   :new.valor:=floor(:new.valor);
+   then RAISE_APPLICATION_ERROR('El valor no puede ser menor a 0');
+  end if;
+ end tr_actualizar_precio_libros;
