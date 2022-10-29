@@ -29,6 +29,7 @@ create table TIPO_DOCUMENTO (
 
 create table PERSONA (
    IDPERSONA            INTEGER               not null,
+   NOMBRE               VARCHAR2(50)          not null, 
    APELLIDO             VARCHAR2(50)          not null,
    FECHA_NACIMIENTO     DATE,
    CONTRASENA           VARCHAR2(50),
